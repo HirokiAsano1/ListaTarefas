@@ -18,7 +18,7 @@ function TarefasList() {
   useEffect(() => {
     async function fetchTarefas() {
       try {
-        const response = await axios.get("http://127.0.0.1:3000/api/tarefas");
+        const response = await axios.get("http://lista-tarefas-jet.vercel.app/api/tarefas");
         setTarefas(response.data);
       } catch (error) {
         console.error("Erro ao buscar tarefas:", error);
@@ -30,11 +30,11 @@ function TarefasList() {
   const handleAddTarefa = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/tarefas",
+        "http://lista-tarefas-jet.vercel.app/api/tarefas",
         newTarefa
       );
 
-      const updatedTarefas = await axios.get("http://127.0.0.1:3000/api/tarefas");
+      const updatedTarefas = await axios.get("http://lista-tarefas-jet.vercel.app/api/tarefas");
       setTarefas(updatedTarefas.data);
 
       setShowModal(false);
@@ -65,12 +65,12 @@ function TarefasList() {
 
       // Atualiza a tarefa via API
       const response = await axios.put(
-        `http://127.0.0.1:3000/api/tarefas/${tarefaToEdit._id}`,
+        `http://lista-tarefas-jet.vercel.app/api/tarefas/${tarefaToEdit._id}`,
         updatedTarefa
       );
 
       // Recarrega a lista de tarefas após a edição
-      const updatedTarefas = await axios.get("http://127.0.0.1:3000/api/tarefas");
+      const updatedTarefas = await axios.get("http://lista-tarefas-jet.vercel.app/api/tarefas");
       setTarefas(updatedTarefas.data);
 
       setShowEditModal(false); // Fecha o modal de edição
@@ -89,7 +89,7 @@ function TarefasList() {
   const confirmDelete = async () => {
     if (!tarefaIdToDelete) return;
     try {
-      await axios.delete(`http://127.0.0.1:3000/api/tarefas/${tarefaIdToDelete}`);
+      await axios.delete(`http://lista-tarefas-jet.vercel.app/api/tarefas/${tarefaIdToDelete}`);
       setTarefas((prevTarefas) =>
         prevTarefas.filter((tarefa) => tarefa._id !== tarefaIdToDelete)
       );
@@ -110,8 +110,8 @@ function TarefasList() {
     if (index === 0) return; // Não pode subir se for a primeira tarefa
 
     try {
-        await axios.put(`http://127.0.0.1:3000/api/tarefas/${id}/moveUp`);
-        const updatedTarefas = await axios.get("http://127.0.0.1:3000/api/tarefas");
+        await axios.put(`http://lista-tarefas-jet.vercel.app/api/tarefas/${id}/moveUp`);
+        const updatedTarefas = await axios.get("http://lista-tarefas-jet.vercel.app/api/tarefas");
         setTarefas(updatedTarefas.data);
     } catch (error) {
         console.error("Erro ao mover tarefa para cima:", error);
@@ -122,8 +122,8 @@ const moveDown = async (id, index) => {
     if (index === tarefas.length - 1) return; // Não pode descer se for a última tarefa
 
     try {
-        await axios.put(`http://127.0.0.1:3000/api/tarefas/${id}/moveDown`);
-        const updatedTarefas = await axios.get("http://127.0.0.1:3000/api/tarefas");
+        await axios.put(`http://lista-tarefas-jet.vercel.app/api/tarefas/${id}/moveDown`);
+        const updatedTarefas = await axios.get("http://lista-tarefas-jet.vercel.app/api/tarefas");
         setTarefas(updatedTarefas.data);
     } catch (error) {
         console.error("Erro ao mover tarefa para baixo:", error);

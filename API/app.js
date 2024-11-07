@@ -2,7 +2,11 @@ const express = require("express")
 const cors = require("cors")
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: '*', // Permite qualquer origem
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permite os métodos
+    allowedHeaders: ['Content-Type'], // Permite o cabeçalho Content-Type
+  }));
 
 app.use(express.json())
 
